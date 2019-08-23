@@ -21,8 +21,7 @@ ARG        LD_LIBRARY_PATH=/opt/ffmpeg/lib
 ARG        PREFIX=/opt/ffmpeg
 ARG        MAKEFLAGS="-j2"
 
-ENV         NVIDIA_HEADERS_VERSION=8.2.15.8
-ENV         FFMPEG_VERSION=4.1.4     \
+ENV         FFMPEG_VERSION=4.2     \
             FDKAAC_VERSION=0.1.5      \
             LAME_VERSION=3.100        \
             LIBASS_VERSION=0.13.7     \
@@ -43,6 +42,7 @@ ENV         FFMPEG_VERSION=4.1.4     \
             LIBVIDSTAB_VERSION=1.1.0  \
             KVAZAAR_VERSION=1.2.0     \
             AOM_VERSION=v1.0.0        \
+            NVIDIA_HEADERS_VERSION=9.0.18.1 \
             SRC=/usr/local
 
 ARG         OGG_SHA256SUM="e19ee34711d7af328cb26287f4137e70630e7261b17cbe3cd41011d73a654692  libogg-1.3.2.tar.gz"
@@ -95,7 +95,7 @@ RUN \
         DIR=/tmp/opencore-amr && \
         mkdir -p ${DIR} && \
         cd ${DIR} && \
-        curl -sLk https://kent.dl.sourceforge.net/project/opencore-amr/opencore-amr/opencore-amr-${OPENCOREAMR_VERSION}.tar.gz | \
+        curl -sLk https://versaweb.dl.sourceforge.net/project/opencore-amr/opencore-amr/opencore-amr-${OPENCOREAMR_VERSION}.tar.gz | \
         tar -zx --strip-components=1 && \
         ./configure --prefix="${PREFIX}" --enable-shared  && \
         make && \
@@ -202,7 +202,7 @@ RUN \
         DIR=/tmp/lame && \
         mkdir -p ${DIR} && \
         cd ${DIR} && \
-        curl -sLk https://kent.dl.sourceforge.net/project/lame/lame/$(echo ${LAME_VERSION} | sed -e 's/[^0-9]*\([0-9]*\)[.]\([0-9]*\)[.]\([0-9]*\)\([0-9A-Za-z-]*\)/\1.\2/')/lame-${LAME_VERSION}.tar.gz | \
+        curl -sLk https://versaweb.dl.sourceforge.net/project/lame/lame/$(echo ${LAME_VERSION} | sed -e 's/[^0-9]*\([0-9]*\)[.]\([0-9]*\)[.]\([0-9]*\)\([0-9A-Za-z-]*\)/\1.\2/')/lame-${LAME_VERSION}.tar.gz | \
         tar -zx --strip-components=1 && \
         ./configure --prefix="${PREFIX}" --bindir="${PREFIX}/bin" --enable-shared --enable-nasm --enable-pic --disable-frontend && \
         make && \
@@ -397,7 +397,7 @@ RUN \
 FROM        base AS release
 
 CMD         ["--help"]
-ENTRYPOINT  ["ffmpeg"]
+ENTRYPOINT  ["bash"]
 ENV         LD_LIBRARY_PATH=/usr/local/lib
 
 COPY --from=build /usr/local /usr/local/
