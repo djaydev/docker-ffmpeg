@@ -404,5 +404,5 @@ COPY --from=build /usr/local /usr/local/
 
 RUN \
 	apt-get update -y && \
-	apt-get install -y --no-install-recommends libva-drm2 libva2 i965-va-driver && \
+	apt-get install -y --no-install-recommends libva-drm2 libva2 i965-va-driver libxcb-shape0 libssl1.1 && \
 	rm -rf /var/lib/apt/lists/*
