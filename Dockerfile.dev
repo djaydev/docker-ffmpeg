@@ -10,7 +10,7 @@ FROM        ubuntu:20.04 AS base
 WORKDIR     /tmp/workdir
 
 RUN     apt-get -yqq update && \
-        apt-get install -yq --no-install-recommends ca-certificates expat libgomp1 && \
+        DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends ca-certificates expat libgomp1 && \
         apt-get autoremove -y && \
         apt-get clean -y
 
@@ -78,7 +78,7 @@ RUN      buildDeps="autoconf \
                     libxcb-shape0-dev \
                     zlib1g-dev" && \
         apt-get -yqq update && \
-        apt-get install -yq --no-install-recommends ${buildDeps}
+        DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends ${buildDeps}
 
 RUN \ 
 	DIR=/tmp/nv-codec-headers && \
@@ -404,5 +404,5 @@ COPY --from=build /usr/local /usr/local/
 
 RUN \
 	apt-get update -y && \
-	apt-get install -y --no-install-recommends libva-drm2 libva2 i965-va-driver libxcb-shape0 libssl1.1 && \
+	DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends libva-drm2 libva2 i965-va-driver libxcb-shape0 libssl1.1 && \
 	rm -rf /var/lib/apt/lists/*
