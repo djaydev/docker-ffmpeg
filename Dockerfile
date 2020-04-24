@@ -42,7 +42,7 @@ ENV         FFMPEG_VERSION=4.2.2     \
             LIBVIDSTAB_VERSION=1.1.0  \
             KVAZAAR_VERSION=1.2.0     \
             AOM_VERSION=v1.0.0        \
-            NVIDIA_HEADERS_VERSION=9.0.18.1 \
+            NVIDIA_HEADERS_VERSION=9.1.23.1 \
             SRC=/usr/local
 
 ARG         OGG_SHA256SUM="e19ee34711d7af328cb26287f4137e70630e7261b17cbe3cd41011d73a654692  libogg-1.3.2.tar.gz"
